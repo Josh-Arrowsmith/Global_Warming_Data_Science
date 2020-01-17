@@ -81,7 +81,7 @@ if(mode == "2"):
 #graph 1 bar(x, height, width=0.8, bottom=None, *, align='center', data=None, **kwargs)
 fig = graphs.figure()
 bargraph1 = fig.add_subplot()
-
+graphs.title("Graph comparing support, confidence, lift and conviction")
 bargraph1.bar(["Rule\nSupport", "Inefficient\nSupport", "High\nEmissions\nSupport","Confidence", "Lift 2", "conviction"],[support_rule,support_inefficient,support_highemissions,confidence,lift2,conviction], width=0.5, bottom=None, align='center', data=None,)
 
 fig.savefig("Graph1.png")
@@ -90,7 +90,20 @@ fig.savefig("Graph1.png")
 
 fig = graphs.figure()
 hbargraph1 = fig.add_subplot()
-
-hbargraph1.barh(["Total Cars", "Total\nHigh\nEmissions\nCars", "Total\nInefficient\nCars","Total\nInefficient\nHigh\nEmissions\nCars"],[total_records,highemissions_count,inefficient_count,inefficient_highemissions_count], height=0.5, left=None, align='center', data=None,)
+graphs.title("Graph comparing total cars, fuel inefficient cars,\nhigh emission cars and fuel inefficient high emission cars")
+hbargraph1.barh(["Total", "High\nEmissions\nCars", "Fuel\nInefficient\nCars","Fuel\nInefficient\n& High\nEmissions\nCars"],[total_records,highemissions_count,inefficient_count,inefficient_highemissions_count], height=0.5, left=None, align='center', data=None,)
+graphs.xlabel("Number of cars")
 
 fig.savefig("Graph2.png")
+
+#scatter(x, y, s=None, c=None, marker=None, cmap=None, norm=None, vmin=None, vmax=None, alpha=None, linewidths=None, verts=None, edgecolors=None, *, plotnonfinite=False, data=None, **kwargs)[source]
+
+fig = graphs.figure()
+scattergraph1 = fig.add_subplot()
+
+graphs.title("Graph comparing CO2 emissions and fuel efficiency of cars\nthat fit into my rule")
+scattergraph1.scatter(inefficient_highemissions_df.co_emissions,inefficient_highemissions_df.combined_metric)
+graphs.xlabel("CO2 emissions (Grams per Kilometre)")
+graphs.ylabel("Fuel efficiency (Litres per 100 Kilometres)")
+
+fig.savefig("Graph3.png")
